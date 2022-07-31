@@ -9,6 +9,8 @@ answer = 'snail'
 #🟩🟨🟥⬛
 tries = 6
 finalboxes = []
+boxes = {}
+letterCount = {}
 while tries > 0:
     j = 0
     guess = input("\nGuess a word: ")
@@ -20,11 +22,12 @@ while tries > 0:
         break
     elif len(guess) == 5:
         tries-=1
-        boxes = {i: '⬛' for i in range(5)}
-        for i in guess:
-            if i == answer[j]:
+        for i in range(5):
+            boxes[i] = '⬛'
+        for x in guess:
+            if x == answer[j]:
                 boxes[j] = '🟩'
-            elif i in answer:
+            elif x in answer and answer.count(x) >= guess.count(x):
                 boxes[j] = '🟨'
             j+=1
         finalboxes.append(' '.join(boxes.values()))
@@ -33,7 +36,6 @@ while tries > 0:
     else:
         print("Please enter a 5 letter word")
     
-
 
 
 
