@@ -4,14 +4,12 @@ with open('wordsGuess.txt') as f:
     words = [line.rstrip() for line in f]
 
 answer = random.choice(words)
-answer = 'snail'
 
 tries = 6
-finalboxes = []
-finalguesses = []
 guesses = {}
 boxes = {}
-letterCount = {}
+finalboxes = []
+finalguesses = []
 while tries > 0:
     j = 0
     guess = input("\nGuess a word: ")
@@ -27,7 +25,7 @@ while tries > 0:
             print(final)
             break
         elif len(guess) == 5:
-            tries-=1
+            tries -= 1
             for i in range(5):
                 boxes[i] = '⬛'
                 guesses[i] = '_'
@@ -38,7 +36,7 @@ while tries > 0:
                 elif x in answer and answer.count(x) >= guess.count(x):
                     boxes[j] = '🟨'
                     guesses[j] = x
-                j+=1
+                j += 1
             finalboxes.append(' '.join(boxes.values()))
             finalguesses.append(' '.join(guesses.values()))
             print(' '.join(boxes.values()))
