@@ -10,6 +10,7 @@ guesses = {}
 boxes = {}
 finalboxes = []
 finalguesses = []
+wrongLetters = []
 while tries > 0:
     j = 0
     guess = input("\nGuess a word: ")
@@ -36,12 +37,19 @@ while tries > 0:
                 elif x in answer and answer.count(x) >= guess.count(x):
                     boxes[j] = '🟨'
                     guesses[j] = x
+                else:
+                    if x not in wrongLetters:
+                        wrongLetters.append(x)
                 j += 1
             finalboxes.append(' '.join(boxes.values()))
             finalguesses.append(' '.join(guesses.values()))
             print(' '.join(boxes.values()))
             print('', '  '.join(guesses.values()))
-            print("You have", tries, "tries left")
+
+            print("These letters are not in the word: ", end='')
+            for letter in sorted(wrongLetters):
+                print(letter, '', end='')
+            print("\nYou have", tries, "tries left")
         else:
             print("Please enter a 5 letter word")
 if tries == 0:
