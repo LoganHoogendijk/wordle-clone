@@ -9,7 +9,7 @@ tries = 6
 guesses = {}
 boxes = {}
 finalboxes = []
-finalguesses = []
+allguesses = []
 wrongLetters = []
 while tries > 0:
     j = 0
@@ -20,13 +20,14 @@ while tries > 0:
         guess = guess.lower()
         if guess == answer:
             finalboxes.append('🟩 🟩 🟩 🟩 🟩')
-            finalguesses.append(' '.join(answer))
+            allguesses.append(' '.join(guess))
             print("\nCongratulations! You won! 🎉\n")
-            final = "\n".join("{} {}".format(x, y) for x, y in zip(finalboxes, finalguesses))
+            final = "\n".join("{} {}".format(x, y) for x, y in zip(finalboxes, allguesses))
             print(final)
             break
         elif len(guess) == 5:
             tries -= 1
+            allguesses.append(' '.join(guess))
             for i in range(5):
                 boxes[i] = '⬛'
                 guesses[i] = '_'
@@ -42,7 +43,6 @@ while tries > 0:
                         wrongLetters.append(x)
                 j += 1
             finalboxes.append(' '.join(boxes.values()))
-            finalguesses.append(' '.join(guesses.values()))
             print(' '.join(boxes.values()))
             print('', '  '.join(guesses.values()))
 
@@ -54,7 +54,7 @@ while tries > 0:
             print("Please enter a 5 letter word")
 if tries == 0:
     print("\nYou lost! 🙁")
-    final = "\n".join("{} {}".format(x, y) for x, y in zip(finalboxes, finalguesses))
+    final = "\n".join("{} {}".format(x, y) for x, y in zip(finalboxes, allguesses))
     print(final)
     print("The correct word was:", answer)
 
