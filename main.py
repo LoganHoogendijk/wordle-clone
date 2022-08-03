@@ -18,9 +18,7 @@ wrongLetters = []
 while tries > 0:
     j = 0
     guess = input("\nGuess a word: ")
-    if not guess.isalpha():
-        print("Please only use letters")
-    elif guess in validWords:
+    if guess in validWords:
         guess = guess.lower()
         if guess == answer:
             finalboxes.append('🟩 🟩 🟩 🟩 🟩')
@@ -29,7 +27,7 @@ while tries > 0:
             final = "\n".join("{} {}".format(x, y) for x, y in zip(finalboxes, allguesses))
             print(final)
             break
-        elif len(guess) == 5:
+        else:
             tries -= 1
             allguesses.append(' '.join(guess))
             for i in range(5):
@@ -54,10 +52,8 @@ while tries > 0:
             for letter in sorted(wrongLetters):
                 print(letter, '', end='')
             print("\nYou have", tries, "tries left")
-        else:
-            print("Please enter a 5 letter word")
     else:
-        print("Please enter a valid word")
+        print("Please enter a valid 5 letter word")
 if tries == 0:
     print("\nYou lost! 🙁")
     final = "\n".join("{} {}".format(x, y) for x, y in zip(finalboxes, allguesses))
