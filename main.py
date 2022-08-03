@@ -5,6 +5,10 @@ with open('wordsGuess.txt') as f:
 
 answer = random.choice(words)
 
+with open('words.txt') as wordF:
+    validWords = [line.rstrip() for line in wordF]
+
+
 tries = 6
 guesses = {}
 boxes = {}
@@ -16,7 +20,7 @@ while tries > 0:
     guess = input("\nGuess a word: ")
     if not guess.isalpha():
         print("Please only use letters")
-    else:
+    elif guess in validWords:
         guess = guess.lower()
         if guess == answer:
             finalboxes.append('🟩 🟩 🟩 🟩 🟩')
@@ -52,6 +56,8 @@ while tries > 0:
             print("\nYou have", tries, "tries left")
         else:
             print("Please enter a 5 letter word")
+    else:
+        print("Please enter a valid word")
 if tries == 0:
     print("\nYou lost! 🙁")
     final = "\n".join("{} {}".format(x, y) for x, y in zip(finalboxes, allguesses))
